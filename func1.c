@@ -19,7 +19,10 @@ void openAll(int choice) {
 
             package *packages = calloc(1, sizeof(package));
 
-            while (fscanf(ongoing, "%s %s %s %s %s", packages[i].sender) != EOF){
+
+            long long int TIME_INFILE;
+            int FirstID, EndID;
+            while (fscanf(ongoing, "%s %s %s %s %qd", packages[i].sender, packages[i].reciever, packages[i].id, FirstID, EndID, TIME_INFILE) != EOF){
                 i++;
                 package *temp = realloc(packages, (i+1)*sizeof(package));
                 if (temp == NULL) break;
