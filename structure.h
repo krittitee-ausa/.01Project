@@ -3,7 +3,7 @@
 
 typedef struct{
     char name[20];
-    char postcode[6];
+    char postcode[7];
 } town_info;
 
 typedef struct{

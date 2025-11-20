@@ -7,11 +7,11 @@ void reset(FILE* file, int*i){
     *i = 0;
 }
 
-void openAll(int choice){
+void openAll(int choice) {
     switch (choice){
         case 0:
             int count = 0;
-            FILE* counter = fopen("D:\\.01Project\\counter.txt", "r+");
+            FILE* counter = fopen("counter.txt", "r+");
             fscanf(counter, "%d", &count);
             printf("%d", count);
 
@@ -33,8 +33,4 @@ void openAll(int choice){
             printf("\033[1m Invalid!! \033[0m");
             break;*/
     }
-
-}
-int main(){
-    openAll(0);
 }
