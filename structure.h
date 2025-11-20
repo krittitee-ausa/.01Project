@@ -12,9 +12,7 @@ typedef struct{
     char id[13];
     town_info first;
     town_info end;
-    char time[10];
-    char month[20];
-    char day[3];
+    long long int time;
 } package;
 
 #endif
