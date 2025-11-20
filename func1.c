@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "structure.h"
 
 void reset(FILE* file, int*i){
@@ -10,18 +11,23 @@ void reset(FILE* file, int*i){
 void openAll(int choice) {
     switch (choice){
         case 0:
-            int count = 0;
+            int count = 0, i = 0;
             FILE* counter = fopen("counter.txt", "r+");
+            FILE* ongoing = fopen("ongoingPackage.txt", "r+");
             fscanf(counter, "%d", &count);
             printf("%d", count);
 
-            /*while (fscanf(ongoing,"%s",packages[i].sender) != EOF){
+            package *packages = calloc(1, sizeof(package));
+
+            while (fscanf(ongoing, "%s %s %s %s %s", packages[i].sender) != EOF){
                 i++;
+                package *temp = realloc(packages, (i+1)*sizeof(package));
+                if (temp == NULL) break;
+                packages = temp;
             }
             printf("success");
             reset(ongoing,&i);
-            while (i < counts){
-                
+            while (i < count){
                 printf("%s",packages[i].sender);
                 i++;
             }
@@ -31,6 +37,6 @@ void openAll(int choice) {
             break;
         default:
             printf("\033[1m Invalid!! \033[0m");
-            break;*/
+            break;
     }
 }
