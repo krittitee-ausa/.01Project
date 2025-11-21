@@ -1,0 +1,6 @@
+Sender Name (STRING)
+Receiver Name (STRING)
+Package ID (STRING)
+From Provinces Code (INT)
+To Provinces Code (INT)
+Time Stamp (LONG LONG INT)
