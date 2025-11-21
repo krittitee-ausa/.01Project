@@ -1,15 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "./functions/loadProvinces.c"
+#include "./functions/loadPackageData.c"
 #include "structure.h"
 
 void init() {
     loadProvinces();
+    loadPackageData();
 }
 
 
 int main(){
     init();
+
+    printf("\nfgdgd %s khkhkjh\n", onGoingPackageData[0].to.provinceNameEn);
 
     printf("\t\033[1mWelcome to the system!\n\033[0m");
     int n = 1;

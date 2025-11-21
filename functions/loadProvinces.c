@@ -5,6 +5,7 @@
 #define provincesPath "./data/provinces.txt"
 
 ProvinceData *Provinces;
+int ProvincesCount;
 
 void loadProvinces()
 {
@@ -28,6 +29,10 @@ void loadProvinces()
             break;
         Provinces = temp;
     }
+    ProvinceData *temp = realloc(Provinces, (i) * sizeof(ProvinceData));
+    Provinces = temp;
+
+    ProvincesCount = i;
 
     fclose(provincesFile);
 

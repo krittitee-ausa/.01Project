@@ -1,13 +1,15 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "../structure.h"
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <time.h>
+//#include "../structure.h"
+//#include "../functions/loadProvinces.c"
 
 #define counterPath "./data/counter.txt"
 #define onGoingPackagePath "./data/onGoingPackage.txt"
 
 package *onGoingPackageData;
 
-int main() {
+void loadPackageData() {
   FILE *counterFile = fopen(counterPath, "r");
   FILE *ongoingPackageFile = fopen(onGoingPackagePath, "r");
 
@@ -19,13 +21,21 @@ int main() {
   for (int index = 0; index < dataCount; index++) {
     int FromProvinceID;
     int ToProvinceID;
-    long long int TimeStamp;
     fscanf(ongoingPackageFile, " %[^\n]\n", onGoingPackageData[index].sender);
     fscanf(ongoingPackageFile, " %[^\n]\n", onGoingPackageData[index].reciever);
     fscanf(ongoingPackageFile, "%s", onGoingPackageData[index].id);
     fscanf(ongoingPackageFile, "%d", &FromProvinceID);
     fscanf(ongoingPackageFile, "%d", &ToProvinceID);
-    fscanf(ongoingPackageFile, "%lld", &TimeStamp);
+    fscanf(ongoingPackageFile, "%ld", &onGoingPackageData[index].time);
+
+    for (int i=0; i < ProvincesCount; i++) {
+      if (FromProvinceID == Provinces[i].provinceCode) {
+        onGoingPackageData[index].from = Provinces[i];
+      }
+      if (ToProvinceID == Provinces[i].provinceCode) {
+        onGoingPackageData[index].to = Provinces[i];
+      }
+    }
 
     //printf("\n\n=== Package Index %d ===\n", index);
     //printf("SENDER: %s\n", onGoingPackageData[index].sender);
@@ -33,9 +43,11 @@ int main() {
     //printf("ID: %s\n", onGoingPackageData[index].id);
     //printf("FROM: %d\n", FromProvinceID);
     //printf("TO: %d\n", ToProvinceID);
-    //printf("TIMESTAMP: %lld\n", TimeStamp);
+    //printf("TIMESTAMP: %s\n", ctime(&onGoingPackageData[index].time));
     //printf("=== Package Index %d ===\n", index);
   }
 
   fclose(ongoingPackageFile);
+
+  return;
 }
