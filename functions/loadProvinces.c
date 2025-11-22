@@ -1,19 +1,13 @@
-#include <stdio.h>
-#include <stdlib.h>
-//#include "..\structure.h" อันนี้เผื่อคอมใช้ไม่ได้
-#include "../structure.h"
-//#define provincesPath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\provinces.txt"
-
 ProvinceData *Provinces;
 int ProvincesCount;
 
 void loadProvinces()
 {
     int i = 0;
-    FILE *provincesFile = fopen(provincesPath, "r");
+    FILE *provincesFile = fopen(dataPath"provinces.txt", "r");
 
     if (provincesFile == NULL) {
-        printf("Error to Open file");
+        printf("Error to Open Provinces file");
         return;
     }
 
@@ -21,6 +15,11 @@ void loadProvinces()
 
     while (fscanf(provincesFile, " %d %s", &Provinces[i].provinceCode, Provinces[i].provinceNameEn) != EOF)
     {
+        for (int charIndex = 0; Provinces[i].provinceNameEn[charIndex] != '\0'; charIndex++) {
+            if (Provinces[i].provinceNameEn[charIndex] == '-') {
+                Provinces[i].provinceNameEn[charIndex] = ' ';
+            }
+        }
         //printf("%d %s\n",Provinces[i].provinceCode, Provinces[i].provinceNameEn);
         
         i++;
