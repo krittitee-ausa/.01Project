@@ -1,5 +1,13 @@
+# Ignore all files
+*
+
+# Un-ignore (keep tracking) all directories
+!*/
+
+# Un-ignore (keep tracking) all files that have an extension (a dot followed by characters)
+!*.*
+
 /.vscode
 /.idea
 CMakeLists.txt
-*.exe
-tester1.c
+

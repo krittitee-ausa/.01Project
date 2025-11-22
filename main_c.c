@@ -1,12 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "func1.c"
+#include <time.h>
+#include "./functions/loadProvinces.c"
+#include "./functions/loadPackageData.c"
 #include "structure.h"
 
-
+void init() {
+    loadProvinces();
+    loadPackageData();
+}
 
 
 int main(){
+    init();
+
+    printf("\nfgdgd %s khkhkjh\n", onGoingPackageData[0].to.provinceNameEn);
 
     printf("\t\033[1mWelcome to the system!\n\033[0m");
     int n = 1;
@@ -18,7 +26,7 @@ int main(){
         switch (n){
             case 1:
                 printf("\033[1mSure!\033[0m");
-                openAll(0);
+                //openAll(0);
                 break;
             case 2:
                 printf("\033[1mSure!\033[0m");
