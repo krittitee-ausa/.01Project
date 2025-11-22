@@ -2,3 +2,4 @@
 /.idea
 CMakeLists.txt
 *.exe
+tester1.c
