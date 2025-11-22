@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+//#include "..\structure.h" อันนี้เผื่อคอมใช้ไม่ได้
 #include "../structure.h"
-
-#define provincesPath "./data/provinces.txt"
+//#define provincesPath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\provinces.txt"
 
 ProvinceData *Provinces;
 int ProvincesCount;

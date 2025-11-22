@@ -1,6 +1,7 @@
 #ifndef myStructure
 #define myStructure
 #include <time.h>
+
 typedef struct {
     int provinceCode;
     char provinceNameEn[50];
@@ -12,6 +13,7 @@ typedef struct{
     ProvinceData from;
     ProvinceData to;
     time_t time;
+    time_t deliveredTime;
 } package;
 
 
