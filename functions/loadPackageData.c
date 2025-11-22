@@ -85,6 +85,7 @@ void loadPackageData() {
 
 
   fclose(ongoingPackageFile);
+  fclose(deliveredPackageFile);
 
   return;
 }
