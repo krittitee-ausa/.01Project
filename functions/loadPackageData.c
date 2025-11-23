@@ -1,4 +1,3 @@
-
 package *onGoingPackageData;
 package *deliveredPackageData;
 int dataCount[2];
@@ -10,9 +9,9 @@ double time_spent;
 
 
 void loadPackageData() {
-  FILE *counterFile = fopen(counterPath, "r");
-  FILE *ongoingPackageFile = fopen(onGoingPackagePath, "r");
-  FILE *deliveredPackageFile = fopen(deliveredPackagePath, "r");
+  FILE *counterFile = fopen(dataPath"counter.txt", "r");
+  FILE *ongoingPackageFile = fopen(dataPath"onGoingPackage.txt", "r");
+  FILE *deliveredPackageFile = fopen(dataPath"DeliveredPackageData.txt", "r");
 
 
 
@@ -92,6 +91,7 @@ void loadPackageData() {
 
 
   fclose(ongoingPackageFile);
+  fclose(deliveredPackageFile);
 
   return;
 }
