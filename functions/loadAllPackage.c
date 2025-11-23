@@ -1,3 +1,5 @@
+
+
 void loadOngoingdata(){
     for(int index = 0; index< dataCount[0];index++){
         printf("\n\n=== Package Index %d ===\n", index);
@@ -9,6 +11,8 @@ void loadOngoingdata(){
         printf("ORDER TIMESTAMP: %s\n", ctime(&onGoingPackageData[index].time));
         printf("=== Package Index %d ===\n", index);
     }
+    if (dataCount[0] == 0)printf("\nThere are no package that are in delivery process.\n");
+    return;
 }
 
 
@@ -24,4 +28,6 @@ void loadDelivereddata(){
         printf("DELIVERED TIMESTAMP: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
         printf("=== Package Index %d ===\n", index);
     }
+    if (dataCount[1] == 0)printf("\nThere are no package that are delivered.\n");
+    return;
 }

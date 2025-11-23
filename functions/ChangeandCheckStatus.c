@@ -40,6 +40,7 @@ void checkStatus(){
 void changeStatus(){
     char ID[13];
     int isChecked = 0;
+    int indexs;
     while(1){
         printf("\nplease enter your package ID : ");
         scanf("%s",ID);
@@ -53,6 +54,7 @@ void changeStatus(){
                 printf("TO: %s\n",  onGoingPackageData[index].to.provinceNameEn);
                 printf("TIMESTAMP: %s\n", ctime(&onGoingPackageData[index].time));
                 isChecked = 1;
+                indexs = index;
                 break;
             } 
         }
@@ -65,10 +67,9 @@ void changeStatus(){
                 printf("TO: %s\n", deliveredPackageData[index].to.provinceNameEn);
                 printf("ORDER TIMESTAMP: %s", ctime(&deliveredPackageData[index].time));
                 printf("DELIVERED TIMESTAMP: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
-                isChecked = 1;
-                break;
+                printf("\033[1mTHIS PACKAGE IS ALREADY DELIVERED, NO NEED TO CHANGE ITS STATUS ANYMORE.\033[0m");
+                return;
                 }
-            
             }
             if (isChecked == 0){
                 printf("\n\033[1mINVALID OR INCORRECT PACKAGE ID, PLEASE CHECK YOUR PACKAGE ID AND TRY AGAIN\033[1m\n");
@@ -86,6 +87,26 @@ void changeStatus(){
         printf("are you sure you want to change this package status?(y/n) : ");
         scanf("%c",&ans);
         getchar();
+        if (ans == 'y'){
+            dataCount[1]++;
+        package* temp = realloc(deliveredPackageData,dataCount[1]*sizeof(package));
+        deliveredPackageData = temp;
+        deliveredPackageData[dataCount[1]-1] = onGoingPackageData[indexs];
+        time_t rawtime;
+        deliveredPackageData[dataCount[1]-1].deliveredTime = time(&rawtime);
+        for (int i = indexs;i<dataCount[0]-1;i++){
+            onGoingPackageData[i] = onGoingPackageData[i+1];
+        }
+        memset(&onGoingPackageData[dataCount[0]-1],0,sizeof(package));
+        printf("SUCCESS");
+        dataCount[0]--;
+        }
+        else {
+            printf("UNDERSTOOD.");
+        }
+        
+
+        
         return;
     }
     else if (ans == 'n'){

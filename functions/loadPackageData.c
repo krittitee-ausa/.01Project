@@ -5,9 +5,9 @@
 #include "../structure.h"
 //#include "../functions/loadProvinces.c"
 
-//#define counterPath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\counter.txt"
-//#define onGoingPackagePath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\onGoingPackage.txt"
-//#define deliveredPackagePath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\DeliveredPackageData.txt"
+#define counterPath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\counter.txt"
+#define onGoingPackagePath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\onGoingPackage.txt"
+#define deliveredPackagePath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\DeliveredPackageData.txt"
 
 package *onGoingPackageData;
 package *deliveredPackageData;
