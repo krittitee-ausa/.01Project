@@ -2,11 +2,15 @@
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
-#include "functions\loadProvinces.c"
-#include "functions\loadPackageData.c"
-#include "functions\loadAllPackage.c"
-#include "functions\ChangeandCheckStatus.c"
+
+#include "path.h"
 #include "structure.h"
+
+#include loadProvincesPath
+#include loadPackageDataPath
+#include loadAllPackagePath
+#include ChangeandCheckStatusPath
+
 
 void init() {
     loadProvinces();

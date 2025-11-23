@@ -1,13 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-//#include "..\structure.h" อันนี้เผื่อคอมใช้ไม่ได้
-#include "../structure.h"
-//#include "../functions/loadProvinces.c"
-
-#define counterPath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\counter.txt"
-#define onGoingPackagePath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\onGoingPackage.txt"
-#define deliveredPackagePath "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\DeliveredPackageData.txt"
 
 package *onGoingPackageData;
 package *deliveredPackageData;
@@ -20,19 +10,19 @@ double time_spent;
 
 
 void loadPackageData() {
-  start_time = clock();
   FILE *counterFile = fopen(counterPath, "r");
   FILE *ongoingPackageFile = fopen(onGoingPackagePath, "r");
   FILE *deliveredPackageFile = fopen(deliveredPackagePath, "r");
 
 
 
-  for (int i = 0;i< 2;i++){
+  /*for (int i = 0;i< 2;i++){
     dataCount[i] = 0;
     fscanf(counterFile, "%d", &dataCount[i]);
-  }
+  }*/
+  fscanf(counterFile, "%d %d", &dataCount[0], &dataCount[1]);
   
-  printf("%d",dataCount[1]);
+  //printf("%d",dataCount[1]);
 
   onGoingPackageData = calloc(dataCount[0], sizeof(package));
   deliveredPackageData = calloc(dataCount[1],sizeof(package));
@@ -102,8 +92,6 @@ void loadPackageData() {
 
 
   fclose(ongoingPackageFile);
-  end_time = clock();
-  time_spent = (double)(end_time - start_time);
-  printf("Execution time: %.4f ms\n", time_spent);
+
   return;
 }

@@ -11,3 +11,4 @@
 /.idea
 CMakeLists.txt
 tempCodeRunnerFile.c
+*.exe
