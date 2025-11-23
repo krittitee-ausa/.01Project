@@ -31,11 +31,11 @@ int main(){
 
         switch (n){
             case 1:
-                printf("\033[1mSure!\033[0m");
+                printf("\033[1mSure!\n Here's all the package that are in delivery process!\033[0m\n");
                 loadOngoingdata();
                 break;
             case 2:
-                printf("\033[1mSure!/n Here's all the package that already delivered!\033[0m");
+                printf("\033[1mSure!\n Here's all the package that already delivered!\033[0m\n");
                 loadDelivereddata();
                 break;
             case 3:

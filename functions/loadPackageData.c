@@ -12,8 +12,15 @@
 package *onGoingPackageData;
 package *deliveredPackageData;
 int dataCount[2];
+#include <stdio.h>
+#include <time.h> // Required for clock() function
+
+clock_t start_time, end_time;
+double time_spent;
+
 
 void loadPackageData() {
+  start_time = clock();
   FILE *counterFile = fopen(counterPath, "r");
   FILE *ongoingPackageFile = fopen(onGoingPackagePath, "r");
   FILE *deliveredPackageFile = fopen(deliveredPackagePath, "r");
@@ -95,6 +102,8 @@ void loadPackageData() {
 
 
   fclose(ongoingPackageFile);
-
+  end_time = clock();
+  time_spent = (double)(end_time - start_time);
+  printf("Execution time: %.4f ms\n", time_spent);
   return;
 }
