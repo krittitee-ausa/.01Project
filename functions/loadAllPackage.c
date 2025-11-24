@@ -17,8 +17,9 @@ void loadOngoingdata(){
 
 
 void loadDelivereddata(){
+
     for(int index = 0; index< dataCount[1];index++){
-        printf("\n\n=== Package Index %d ===\n", index);
+     printf("\n\n=== Package Index %d ===\n", index);
         printf("SENDER: %s\n", deliveredPackageData[index].sender);
         printf("RECEIVER: %s\n", deliveredPackageData[index].reciever);
         printf("ID: %s\n", deliveredPackageData[index].id);

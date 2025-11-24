@@ -43,7 +43,7 @@ void checkStatus(){
 }
 
 void changeStatus(){
- /*   char ID[13];
+    char ID[13];
     int isChecked = 0;
     int indexs;
     while(1){
@@ -99,6 +99,7 @@ void changeStatus(){
         deliveredPackageData[dataCount[1]-1] = onGoingPackageData[indexs];
         time_t rawtime;
         deliveredPackageData[dataCount[1]-1].deliveredTime = time(&rawtime);
+        printf("\n%s\n",ctime(&deliveredPackageData[dataCount[1]-1].deliveredTime));
         for (int i = indexs;i<dataCount[0]-1;i++){
             onGoingPackageData[i] = onGoingPackageData[i+1];
         }
@@ -110,7 +111,7 @@ void changeStatus(){
             printf("UNDERSTOOD.");
         }
         
-
+        printf("\n%s\n",ctime(&deliveredPackageData[dataCount[1]-1].deliveredTime));
         
         return;
     }
@@ -121,5 +122,5 @@ void changeStatus(){
     else{
         printf("Invalid answer please try again later.\n");
         return;
-    }*/
+    }
 }

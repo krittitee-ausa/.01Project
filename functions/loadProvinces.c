@@ -1,6 +1,8 @@
 
 ProvinceData *Provinces;
+
 int ProvincesCount;
+int count = 0;
 
 void loadProvinces()
 {
@@ -33,6 +35,8 @@ void loadProvinces()
     Provinces = temp;
 
     ProvincesCount = i;
+    
+    
 
     fclose(provincesFile);
 

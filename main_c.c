@@ -10,11 +10,13 @@
 #include loadPackageDataPath
 #include loadAllPackagePath
 #include ChangeandCheckStatusPath
+#include PlaceNewOrder
 
 
 void init() {
     loadProvinces();
     loadPackageData();
+    readlowercaseProvinces();
 
     
 }
@@ -22,11 +24,13 @@ void init() {
 
 int main(){
     init();
+    
 
     printf("\nfgdgd %s khkhkjh\n", onGoingPackageData[0].to.provinceNameEn);
 
     printf("\t\033[1mWelcome to the system!\n\033[0m");
     int n = 1;
+    int isloaded = 0;
     while (1 == 1){
         printf("\n 1.List all ongoing package.\n 2.List all delivered package.\n 3.check a package status.\n 4.change a package status.\n 5.make (a) delivery order(s).\n");
         printf("your desired service number : ");
@@ -40,6 +44,10 @@ int main(){
                 break;
             case 2:
                 printf("\033[1mSure!\n Here's all the package that already delivered!\033[0m\n");
+                if (isloaded == 0){
+                    loadDeliveredPackageData();
+                    isloaded = 1;
+                }
                 loadDelivereddata();
                 break;
             case 3:
@@ -52,7 +60,7 @@ int main(){
                 break;
             case 5:
                 printf("\033[1mSure!\033[0m");
-                //function 5
+                NewOrder();
                 break;
             default:
                 printf("\033[1m Invalid command, please input the number of command again.\033[0m");

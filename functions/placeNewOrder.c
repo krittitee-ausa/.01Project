@@ -1,13 +1,75 @@
+typedef struct{
+    char name[50];
+    int index;
+    
+}lowercaseP;
+int provinceIndex[2];
+lowercaseP* lowercaseProvinces; 
+int lowercase(char str[],int* index){
+    for (int i = 0;i < strlen(str);i++){
+        if (str[i] <= 90 && str[i] >=65){
+           str[i]+=32;
+        }
+    }
+    for (int i = 0; i < ProvincesCount;i++){
+        if (strcmp(str,lowercaseProvinces[i].name) == 0)
+        { 
+            *index = i;
+            return 1;
+        }
+    }
+    return 0;
+    
+}
+void readlowercaseProvinces(){
+    lowercaseProvinces = calloc(ProvincesCount,sizeof(lowercaseP));
+    for (int i = 0; i < ProvincesCount;i++){
+        strcpy(lowercaseProvinces[i].name,Provinces[i].provinceNameEn);
+        lowercaseProvinces[i].index = Provinces[i].provinceCode;
+        for (int j = 0;j < strlen(lowercaseProvinces[i].name);j++){
+        if (lowercaseProvinces[i].name[j] <= 90 && lowercaseProvinces[i].name[j] >=65){
+            lowercaseProvinces[i].name[j]+=32;
+        }
+    }
+        }
+    
+    
+    for (int i = 0; i < ProvincesCount;i++){
+        printf("\n%d : %s",lowercaseProvinces[i].index,lowercaseProvinces[i].name);
+    }
+}
+
 void NewOrder(){
-    char buffer[4][150];
+    char buffer[4][50];
     printf("sure!, what's your name? : ");
-    scanf("%s",buffer[0]);
+    fgets(buffer[0],50,stdin);
+    buffer[0][strlen(buffer[0])-1] = '\0';
+
     printf("who do you want to send yor package to? : ");
-    scanf("%s",buffer[1]);
+    fgets(buffer[1],50,stdin);
+    buffer[1][strlen(buffer[1])-1] = '\0';
+
+    
     printf("what province are you in? : ");
-    scanf("%s",buffer[2]);
+    fgets(buffer[2],50,stdin);
+    buffer[2][strlen(buffer[2])-1] = '\0';
+    while (lowercase(buffer[2],&provinceIndex[0]) == 0){
+        printf("%s\n",buffer[2]);
+        printf("invalid provinces, please input your provinces again : ");
+        fgets(buffer[2],50,stdin);
+        buffer[2][strlen(buffer[2])-1] = '\0';
+    }
+    
+
+    
     printf("and what is the destination's province? : ");
-    scanf("%s",buffer[3]);
+    fgets(buffer[3],50,stdin);
+    buffer[3][strlen(buffer[3])-1] = '\0';
+    while (lowercase(buffer[3],&provinceIndex[1]) == 0){
+        printf("invalid provinces, please input your destination's provinces again : ");
+        fgets(buffer[3],50,stdin);
+        buffer[3][strlen(buffer[3])-1] = '\0';
+    }
     char ans;
     while(1){
         printf("\nSENDER : %s \n",buffer[0]);
@@ -20,17 +82,75 @@ void NewOrder(){
         if (ans == 'y'){
             printf("\033[1m\nSuccess! You successfully placed an order!\n\033[0m");
             dataCount[0]++;
+            package* temp = realloc(onGoingPackageData,dataCount[0]*sizeof(package));
+            onGoingPackageData = temp;
+            strcpy(onGoingPackageData[dataCount[0]-1].sender,buffer[0]);
+            strcpy(onGoingPackageData[dataCount[0]-1].reciever,buffer[1]);
+            onGoingPackageData[dataCount[0]-1].from = Provinces[provinceIndex[0]];
+            onGoingPackageData[dataCount[0]-1].to = Provinces[provinceIndex[1]];
+            char strbuffer[11];
+            char strbuffer2[13];
+            sprintf(strbuffer2,"%d%d",onGoingPackageData[dataCount[0]-1].from.provinceCode,onGoingPackageData[dataCount[0]-1].to.provinceCode);
+            time_t rawtime;
+            sprintf(strbuffer,"%lld",time(&rawtime));
+            strcat(strbuffer2,&strbuffer[4]);
+            long long tmp[4];
+            char *end;
+            tmp[0] = strtoll(strbuffer2,&end,10);
+            while(1){
+                int a = 0;
+                for (int i = 0; i < dataCount[0]+dataCount[1];i++){
+                    if (i < dataCount[0]){
+                        tmp[1] = strtoll(onGoingPackageData[i].id,&end,10);
+                        if (tmp[1] == tmp[0]){
+                            tmp[0]++;
+                            a = 1;
+                            break;
+                        }
+                        
+                    }
+                    else if (i >= dataCount[0] && i < dataCount[0]+dataCount[1]){
+                         tmp[1] = strtoll(deliveredPackageData[i-dataCount[0]].id,&end,10);
+                        if (tmp[1] == tmp[0]){
+                            tmp[0]++;
+                            a = 1;
+                            break;
+                        }
+                    }
+                    else a = 0;
+                }
+                if (a == 0) break;
+
+            }
+            sprintf(strbuffer2,"%lld",tmp[0]);
+            strcpy(onGoingPackageData[dataCount[0]-1].id,strbuffer2);
+            onGoingPackageData[dataCount[0]-1].time = time(&rawtime);
+
             
-            package* temp = realloc(onGoingPackagedata,dataCount[0]*sizeof(package));
             return;
         }
         else if(ans == 'n'){
             int index;
-            printf("Which data do you want to edit?\n1. Sender name\n2. Reciever name\n3. your province\n4. destination's province");
-            scnaf("%d",&index);
-            getchar();
+            while(1){
+                printf("Which data do you want to edit?\n1. Sender name\n2. Reciever name\n3. your province\n4. destination's province\nYour function : ");
+                scanf("%d",&index);
+                getchar();
+                if (index < 1 || index > 4){
+                    printf("please input the valid function number\n");
+                    continue;
+                }
+                break;
+            }
             printf("sure!\nplease input a new data : ");
-            scanf("%s", buffer[index-1]);
+            fgets(buffer[index-1],50,stdin);
+            buffer[index-1][strlen(buffer[index-1])-1] = '\0';
+            if (index >= 3){
+                while(lowercase(buffer[index-1],&provinceIndex[index -3]) == 0){
+                    (index = 3)?printf("invalid provinces, please input your provinces again : "):printf("invalid provinces,please input your destination's provinces again : ");
+                    fgets(buffer[index-1],50,stdin);
+                    buffer[index-1][strlen(buffer[index-1])-1] = '\0';
+                }
+            }
             printf("\n");
             
         }

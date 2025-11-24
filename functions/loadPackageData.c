@@ -11,7 +11,7 @@ double time_spent;
 void loadPackageData() {
   FILE *counterFile = fopen(dataPath"counter.txt", "r");
   FILE *ongoingPackageFile = fopen(dataPath"onGoingPackage.txt", "r");
-  FILE *deliveredPackageFile = fopen(dataPath"DeliveredPackageData.txt", "r");
+  
 
 
 
@@ -55,7 +55,32 @@ void loadPackageData() {
     //printf("TIMESTAMP: %s\n", ctime(&onGoingPackageData[index].time));
     //printf("=== Package Index %d ===\n", index);
   }
-  for (int index = 0; index < dataCount[1]; index++) {
+ 
+
+    //printf("\n\n=== Package Index %d ===\n", index);
+    //printf("SENDER: %s\n", deliveredPackageData[index].sender);
+    //printf("RECEIVER: %s\n", deliveredPackageData[index].reciever);
+    //printf("ID: %s\n", deliveredPackageData[index].id);
+    //printf("FROM: %d\n", FromProvinceID);
+    //printf("TO: %d\n", ToProvinceID);
+    //printf("TIMESTAMP: %s", ctime(&deliveredPackageData[index].time));
+    //printf("DELIVERED TIMESTAMP: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
+    //printf("=== Package Index %d ===\n", index);
+
+
+
+  fclose(ongoingPackageFile);
+  
+  end_time = clock();
+  printf("runtime : %.2lf ms",(double)end_time - start_time);
+
+  return;
+}
+
+void loadDeliveredPackageData(){
+  start_time = clock();
+  FILE *deliveredPackageFile = fopen(dataPath"DeliveredPackageData.txt", "r");
+     for (int index = 0; index < dataCount[1]; index++) {
     int FromProvinceID;
     int ToProvinceID;
     fscanf(deliveredPackageFile, " %[^\n]\n", deliveredPackageData[index].sender);
@@ -76,22 +101,7 @@ void loadPackageData() {
 
       }
     }
-
-    //printf("\n\n=== Package Index %d ===\n", index);
-    //printf("SENDER: %s\n", deliveredPackageData[index].sender);
-    //printf("RECEIVER: %s\n", deliveredPackageData[index].reciever);
-    //printf("ID: %s\n", deliveredPackageData[index].id);
-    //printf("FROM: %d\n", FromProvinceID);
-    //printf("TO: %d\n", ToProvinceID);
-    //printf("TIMESTAMP: %s", ctime(&deliveredPackageData[index].time));
-    //printf("DELIVERED TIMESTAMP: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
-    //printf("=== Package Index %d ===\n", index);
-
-  }
-
-
-  fclose(ongoingPackageFile);
-  fclose(deliveredPackageFile);
-
-  return;
+    }
+    fclose(deliveredPackageFile);
+    
 }
