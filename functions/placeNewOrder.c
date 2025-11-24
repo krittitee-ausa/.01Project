@@ -6,17 +6,30 @@ typedef struct{
 int provinceIndex[2];
 lowercaseP* lowercaseProvinces; 
 int lowercase(char str[],int* index){
-    for (int i = 0;i < strlen(str);i++){
-        if (str[i] <= 90 && str[i] >=65){
-           str[i]+=32;
+    char str2[] = "see all provinces";
+    if (strcmp(str,str2) == 0){
+        for (int i = 0;i < ProvincesCount;i++){
+            printf("%s\n",Provinces[i].provinceNameEn);
+            
         }
+        printf("\n please input the province again : ");
     }
-    for (int i = 0; i < ProvincesCount;i++){
-        if (strcmp(str,lowercaseProvinces[i].name) == 0)
-        { 
-            *index = i;
-            return 1;
+    else{
+        for (int i = 0;i < strlen(str);i++){
+            if (str[i] <= 90 && str[i] >=65){
+            str[i]+=32;
+            }
         }
+        for (int i = 0; i < ProvincesCount;i++){
+            if (strcmp(str,lowercaseProvinces[i].name) == 0)
+            { 
+                *index = i;
+                return 1;
+            }
+        }
+        //printf("%s\n",buffer[2]);
+        printf("invalid provinces, please input the provinces again (type \"see all provinces\" to view all province possible.)\n: ");
+        
     }
     return 0;
     
@@ -50,23 +63,20 @@ void NewOrder(){
     buffer[1][strlen(buffer[1])-1] = '\0';
 
     
-    printf("what province are you in? : ");
+    printf("what province are you in? (type \"see all provinces\" to view all province possible.)\n: ");
     fgets(buffer[2],50,stdin);
     buffer[2][strlen(buffer[2])-1] = '\0';
     while (lowercase(buffer[2],&provinceIndex[0]) == 0){
-        printf("%s\n",buffer[2]);
-        printf("invalid provinces, please input your provinces again : ");
         fgets(buffer[2],50,stdin);
         buffer[2][strlen(buffer[2])-1] = '\0';
     }
     
 
     
-    printf("and what is the destination's province? : ");
+    printf("and what is the destination's province? (type \"see all provinces\" to view all province possible.)\n ");
     fgets(buffer[3],50,stdin);
     buffer[3][strlen(buffer[3])-1] = '\0';
     while (lowercase(buffer[3],&provinceIndex[1]) == 0){
-        printf("invalid provinces, please input your destination's provinces again : ");
         fgets(buffer[3],50,stdin);
         buffer[3][strlen(buffer[3])-1] = '\0';
     }
@@ -146,7 +156,6 @@ void NewOrder(){
             buffer[index-1][strlen(buffer[index-1])-1] = '\0';
             if (index >= 3){
                 while(lowercase(buffer[index-1],&provinceIndex[index -3]) == 0){
-                    (index = 3)?printf("invalid provinces, please input your provinces again : "):printf("invalid provinces,please input your destination's provinces again : ");
                     fgets(buffer[index-1],50,stdin);
                     buffer[index-1][strlen(buffer[index-1])-1] = '\0';
                 }

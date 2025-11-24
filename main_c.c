@@ -33,11 +33,14 @@ int main(){
     int isloaded = 0;
     while (1 == 1){
         printf("\n 1.List all ongoing package.\n 2.List all delivered package.\n 3.check a package status.\n 4.change a package status.\n 5.make (a) delivery order(s).\n");
-        printf("your desired service number : ");
+        printf("your desired service number (-1 to exit program): ");
         scanf("%d",&n);
         getchar();
 
         switch (n){
+            case -1:
+                printf("goodbye.");
+                return 0;
             case 1:
                 printf("\033[1mSure!\n Here's all the package that are in delivery process!\033[0m\n");
                 loadOngoingdata();
