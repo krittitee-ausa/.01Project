@@ -10,12 +10,12 @@ void checkStatus(){
     for (int index = 0;index < dataCount[0];index++){
         if (strcmp(ID,onGoingPackageData[index].id) == 0){
             printf("\n===== PACKAGE FOUND =====\n");
+            printf("PACKAGE ID\t: %s\n", onGoingPackageData[index].id);
             printf("SENDER\t\t: %s\n", onGoingPackageData[index].sender);
-            printf("RECEIVER\t\t: %s\n", onGoingPackageData[index].reciever);
-            printf("ID\t\t: %s\n", onGoingPackageData[index].id);
+            printf("RECEIVER\t: %s\n", onGoingPackageData[index].reciever);
             printf("FROM\t\t: %s\n", onGoingPackageData[index].from.provinceNameEn);
             printf("TO\t\t: %s\n",  onGoingPackageData[index].to.provinceNameEn);
-            printf("TIMESTAMP\t\t: %s\n", ctime(&onGoingPackageData[index].time));
+            printf("ORDER TIMESTAMP\t: %s\n", ctime(&onGoingPackageData[index].time));
             printf("\033[1mPACKAGE STATUS : DELIVERY IN PROGRESS.\n\033[0m");
             printf("==========================\n");
             return;
@@ -25,13 +25,13 @@ void checkStatus(){
     for (int index = 0;index < dataCount[1];index++){
         if (strcmp(ID,deliveredPackageData[index].id) == 0){
             printf("\n===== PACKAGE FOUND =====\n");
+            printf("PACKAGE ID\t: %s\n", deliveredPackageData[index].id);
             printf("SENDER\t\t: %s\n", deliveredPackageData[index].sender);
-            printf("RECEIVER\t\t: %s\n", deliveredPackageData[index].reciever);
-            printf("ID\t\t: %s\n", deliveredPackageData[index].id);
+            printf("RECEIVER\t: %s\n", deliveredPackageData[index].reciever);
             printf("FROM\t\t: %s\n", deliveredPackageData[index].from.provinceNameEn);
             printf("TO\t\t: %s\n", deliveredPackageData[index].to.provinceNameEn);
-            printf("ORDER TIMESTAMP\t\t: %s", ctime(&deliveredPackageData[index].time));
-            printf("DELIVERED TIMESTAMP\t\t: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
+            printf("ORDER TIMESTAMP\t: %s", ctime(&deliveredPackageData[index].time));
+            printf("DELIVERED\t: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
             printf("\033[1mPACKAGE STATUS : DELIVERED SUCCESSFULLY.\n\033[0m");
             printf("==========================\n");
             return;
@@ -52,12 +52,14 @@ void changeStatus(){
         getchar();
         for (int index = 0;index < dataCount[0];index++){
             if (strcmp(ID,onGoingPackageData[index].id) == 0){
-                printf("SENDER: %s\n", onGoingPackageData[index].sender);
-                printf("RECEIVER: %s\n", onGoingPackageData[index].reciever);
-                printf("ID: %s\n", onGoingPackageData[index].id);
-                printf("FROM: %s\n", onGoingPackageData[index].from.provinceNameEn);
-                printf("TO: %s\n",  onGoingPackageData[index].to.provinceNameEn);
-                printf("TIMESTAMP: %s\n", ctime(&onGoingPackageData[index].time));
+                printf("\n===== PACKAGE FOUND =====\n");
+                printf("PACKAGE ID\t: %s\n", onGoingPackageData[index].id);
+                printf("SENDER\t\t: %s\n", onGoingPackageData[index].sender);
+                printf("RECEIVER\t: %s\n", onGoingPackageData[index].reciever);
+                printf("FROM\t\t: %s\n", onGoingPackageData[index].from.provinceNameEn);
+                printf("TO\t\t: %s\n",  onGoingPackageData[index].to.provinceNameEn);
+                printf("TIMESTAMP\t: %s\n", ctime(&onGoingPackageData[index].time));
+                printf("==========================\n");
                 isChecked = 1;
                 indexs = index;
                 break;
@@ -65,19 +67,21 @@ void changeStatus(){
         }
         for (int index = 0;index < dataCount[1] && isChecked != 1;index++){
             if (strcmp(ID,deliveredPackageData[index].id) == 0){
-                printf("SENDER: %s\n", deliveredPackageData[index].sender);
-                printf("RECEIVER: %s\n", deliveredPackageData[index].reciever);
-                printf("ID: %s\n", deliveredPackageData[index].id);
-                printf("FROM: %s\n", deliveredPackageData[index].from.provinceNameEn);
-                printf("TO: %s\n", deliveredPackageData[index].to.provinceNameEn);
-                printf("ORDER TIMESTAMP: %s", ctime(&deliveredPackageData[index].time));
-                printf("DELIVERED TIMESTAMP: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
-                printf("\033[1mTHIS PACKAGE IS ALREADY DELIVERED, NO NEED TO CHANGE ITS STATUS ANYMORE.\033[0m");
+                printf("\n===== PACKAGE FOUND =====\n");
+                printf("PACKAGE ID\t: %s\n", deliveredPackageData[index].id);
+                printf("SENDER\t\t: %s\n", deliveredPackageData[index].sender);
+                printf("RECEIVER\t: %s\n", deliveredPackageData[index].reciever);
+                printf("FROM\t\t: %s\n", deliveredPackageData[index].from.provinceNameEn);
+                printf("TO\t\t: %s\n", deliveredPackageData[index].to.provinceNameEn);
+                printf("ORDER TIMESTAMP\t\t: %s", ctime(&deliveredPackageData[index].time));
+                printf("DELIVERED TIMESTAMP\t: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
+                printf("==========================\n\n");
+                printf("\033[1mTHIS PACKAGE IS ALREADY DELIVERED, NO NEED TO CHANGE ITS STATUS ANYMORE.\033[0m\n");
                 return;
                 }
             }
             if (isChecked == 0){
-                printf("\n\033[1mINVALID OR INCORRECT PACKAGE ID, PLEASE CHECK YOUR PACKAGE ID AND TRY AGAIN\033[1m\n");
+                printf("\n\033[1mINVALID OR INCORRECT PACKAGE ID, PLEASE CHECK YOUR PACKAGE ID AND TRY AGAIN\033[0m\n");
                 return;
         
             }
@@ -99,19 +103,17 @@ void changeStatus(){
         deliveredPackageData[dataCount[1]-1] = onGoingPackageData[indexs];
         time_t rawtime;
         deliveredPackageData[dataCount[1]-1].deliveredTime = time(&rawtime);
-        printf("\n%s\n",ctime(&deliveredPackageData[dataCount[1]-1].deliveredTime));
         for (int i = indexs;i<dataCount[0]-1;i++){
             onGoingPackageData[i] = onGoingPackageData[i+1];
         }
         memset(&onGoingPackageData[dataCount[0]-1],0,sizeof(package));
-        printf("SUCCESS");
+        printf("SUCCESS\n");
         dataCount[0]--;
         }
         else {
-            printf("UNDERSTOOD.");
+            printf("UNDERSTOOD.\n");
         }
         
-        printf("\n%s\n",ctime(&deliveredPackageData[dataCount[1]-1].deliveredTime));
         
         return;
     }

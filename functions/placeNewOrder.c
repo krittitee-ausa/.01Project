@@ -45,16 +45,11 @@ void readlowercaseProvinces(){
         }
     }
         }
-    
-    
-    for (int i = 0; i < ProvincesCount;i++){
-        printf("\n%d : %s",lowercaseProvinces[i].index,lowercaseProvinces[i].name);
-    }
 }
 
 void NewOrder(){
     char buffer[4][50];
-    printf("sure!, what's your name? : ");
+    printf("\n what's your name? : ");
     fgets(buffer[0],50,stdin);
     buffer[0][strlen(buffer[0])-1] = '\0';
 

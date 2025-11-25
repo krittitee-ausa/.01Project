@@ -11,63 +11,54 @@
 #include loadAllPackagePath
 #include ChangeandCheckStatusPath
 #include PlaceNewOrder
+#include User_select
 
 
 void init() {
     loadProvinces();
     loadPackageData();
     readlowercaseProvinces();
+    loadDeliveredPackageData();
 
     
 }
 
 
+int n = 1;
 int main(){
     init();
     
-
-    printf("\nfgdgd %s khkhkjh\n", onGoingPackageData[0].to.provinceNameEn);
-
-    printf("\t\033[1mWelcome to the system!\n\033[0m");
-    int n = 1;
-    int isloaded = 0;
-    while (1 == 1){
-        printf("\n 1.List all ongoing package.\n 2.List all delivered package.\n 3.check a package status.\n 4.change a package status.\n 5.make (a) delivery order(s).\n");
-        printf("your desired service number (-1 to exit program): ");
-        scanf("%d",&n);
+    int user_ans;
+    char user_buffer[20];
+    int cons = 0;
+    while (cons == 0){
+    
+        printf("\n\t\033[1mWelcome to the system!\n\033[0m\n");
+        printf("What are you?\n1. Admin\n2. Customer\n:: ");
+        scanf("%d",&user_ans);
         getchar();
-
-        switch (n){
-            case -1:
-                printf("goodbye.");
-                return 0;
-            case 1:
-                printf("\033[1mSure!\n Here's all the package that are in delivery process!\033[0m\n");
-                loadOngoingdata();
-                break;
-            case 2:
-                printf("\033[1mSure!\n Here's all the package that already delivered!\033[0m\n");
-                if (isloaded == 0){
-                    loadDeliveredPackageData();
-                    isloaded = 1;
-                }
-                loadDelivereddata();
-                break;
-            case 3:
-                printf("\033[1mSure!\033[0m");
-                checkStatus();
-                break;
-            case 4:
-                printf("\033[1mSure!\033[0m");
-                changeStatus();
-                break;
-            case 5:
-                printf("\033[1mSure!\033[0m");
-                NewOrder();
-                break;
-            default:
-                printf("\033[1m Invalid command, please input the number of command again.\033[0m");
-                break;
+        if (user_ans == 1){
+            printf("Please enter the password (type \"c\" to cancel Admin login) : ");
+            fgets(user_buffer,20,stdin);
+            user_buffer[strlen(user_buffer)-1] = '\0';
+            if (strcmp(user_buffer, "CPE888") == 0){
+                printf("\n\033[1mWelcome Admin!\033[0m\n");
+                cons = 1;
+            }
+            else{
+                printf("\nInvalid password, please try again.\n");
+            }
         }
+        else if (user_ans == 2){
+            printf("\n\033[1mWelcome customer!\033[0m\n");
+            cons = 2;
+        }
+        else printf("\n\033[1mInvalid input please input your user choice again.\n\033[0m");
     }
+    if (cons == 1)Admin_POV();
+    else Customer_POV();
+    
+    return 0;
+    
+    
 }
