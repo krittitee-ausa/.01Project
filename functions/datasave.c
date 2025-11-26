@@ -9,12 +9,12 @@ void dataSave(){
         if (i != 0){
             fprintf(onGoingPackageFile,"\n");
         }
-    fprintf(onGoingPackageFile,"%s\n%s\n%s\n%d\n%d\n%lld",onGoingPackageData[i].sender,
+    fprintf(onGoingPackageFile,"%s\n%s\n%s\n%d\n%d\n%ld",onGoingPackageData[i].sender,
         onGoingPackageData[i].reciever,onGoingPackageData[i].id,onGoingPackageData[i].from.provinceCode,
     onGoingPackageData[i].to.provinceCode,onGoingPackageData[i].time);
     }
     for(int i = dataCount[2];i < dataCount[1];i++){
-        fprintf(deliveredPackageFile,"\n%s\n%s\n%s\n%d\n%d\n%lld\n%lld",deliveredPackageData[i].sender,
+        fprintf(deliveredPackageFile,"\n%s\n%s\n%s\n%d\n%d\n%ld\n%ld",deliveredPackageData[i].sender,
         deliveredPackageData[i].reciever,deliveredPackageData[i].id,deliveredPackageData[i].from.provinceCode,
     deliveredPackageData[i].to.provinceCode,deliveredPackageData[i].time,deliveredPackageData[i].deliveredTime);
     }

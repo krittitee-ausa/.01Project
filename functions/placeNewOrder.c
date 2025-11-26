@@ -97,9 +97,9 @@ void NewOrder(){
             char strbuffer2[13];
             sprintf(strbuffer2,"%d%d",onGoingPackageData[dataCount[0]-1].from.provinceCode,onGoingPackageData[dataCount[0]-1].to.provinceCode);
             time_t rawtime;
-            sprintf(strbuffer,"%lld",time(&rawtime));
+            sprintf(strbuffer,"%ld",time(&rawtime));
             strcat(strbuffer2,&strbuffer[4]);
-            long long tmp[4];
+            long tmp[4];
             char *end;
             tmp[0] = strtoll(strbuffer2,&end,10);
             while(1){
@@ -127,7 +127,7 @@ void NewOrder(){
                 if (a == 0) break;
 
             }
-            sprintf(strbuffer2,"%lld",tmp[0]);
+            sprintf(strbuffer2,"%ld",tmp[0]);
             strcpy(onGoingPackageData[dataCount[0]-1].id,strbuffer2);
             onGoingPackageData[dataCount[0]-1].time = time(&rawtime);
 
