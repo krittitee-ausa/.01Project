@@ -6,7 +6,7 @@ void loadOngoingdata(){
         printf("\n\n=== PACKAGE ID %s ===\n", onGoingPackageData[index].id);
         printf("SENDER\t\t: %s\n", onGoingPackageData[index].sender);
         printf("RECEIVER\t: %s\n", onGoingPackageData[index].reciever);
-        printf("ID\t\t: %s\n", onGoingPackageData[index].id);
+        //printf("ID\t\t: %s\n", onGoingPackageData[index].id);
         printf("FROM\t\t: %s\n", onGoingPackageData[index].from.provinceNameEn);
         printf("TO\t\t: %s\n", onGoingPackageData[index].to.provinceNameEn);
         printf("ORDER TIMESTAMP\t: %s\n", ctime(&onGoingPackageData[index].time));

@@ -4,7 +4,6 @@ int dataCount[3];
 #include <stdio.h>
 #include <time.h> // Required for clock() function
 
-clock_t start_time, end_time;
 double time_spent;
 
 
@@ -71,14 +70,13 @@ void loadPackageData() {
 
   fclose(ongoingPackageFile);
   
-  end_time = clock();
-  printf("runtime : %.2lf ms",(double)end_time - start_time);
+
 
   return;
 }
 
 void loadDeliveredPackageData(){
-  start_time = clock();
+  
   FILE *deliveredPackageFile = fopen(dataPath"DeliveredPackageData.txt", "r");
      for (int index = 0; index < dataCount[1]; index++) {
     int FromProvinceID;

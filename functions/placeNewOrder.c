@@ -68,7 +68,7 @@ void NewOrder(){
     
 
     
-    printf("and what is the destination's province? (type \"see all provinces\" to view all province possible.)\n ");
+    printf("and what is the destination's province? (type \"see all provinces\" to view all province possible.)\n: ");
     fgets(buffer[3],50,stdin);
     buffer[3][strlen(buffer[3])-1] = '\0';
     while (lowercase(buffer[3],&provinceIndex[1]) == 0){
@@ -130,6 +130,7 @@ void NewOrder(){
             sprintf(strbuffer2,"%ld",tmp[0]);
             strcpy(onGoingPackageData[dataCount[0]-1].id,strbuffer2);
             onGoingPackageData[dataCount[0]-1].time = time(&rawtime);
+            printf("\nYour package ID is : %s\n", onGoingPackageData[dataCount[0]-1].id);
 
             
             return;
