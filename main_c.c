@@ -10,8 +10,9 @@
 #include loadPackageDataPath
 #include loadAllPackagePath
 #include ChangeandCheckStatusPath
-#include PlaceNewOrder
-#include User_select
+#include PlaceNewOrderPath
+#include UserSelectPath
+#include dataSavePath
 
 
 void init() {
@@ -22,9 +23,6 @@ void init() {
 
     
 }
-
-
-int n = 1;
 int main(){
     init();
     
@@ -57,7 +55,7 @@ int main(){
     }
     if (cons == 1)Admin_POV();
     else Customer_POV();
-    
+    dataSave();
     return 0;
     
     

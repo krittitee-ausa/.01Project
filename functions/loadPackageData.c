@@ -1,6 +1,6 @@
 package *onGoingPackageData;
 package *deliveredPackageData;
-int dataCount[2];
+int dataCount[3];
 #include <stdio.h>
 #include <time.h> // Required for clock() function
 
@@ -20,7 +20,7 @@ void loadPackageData() {
     fscanf(counterFile, "%d", &dataCount[i]);
   }*/
   fscanf(counterFile, "%d %d", &dataCount[0], &dataCount[1]);
-  
+  dataCount[2] = dataCount[1];
   //printf("%d",dataCount[1]);
 
   onGoingPackageData = calloc(dataCount[0], sizeof(package));
