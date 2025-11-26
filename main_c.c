@@ -9,11 +9,11 @@
 #include loadProvincesPath
 #include loadPackageDataPath
 #include loadAllPackagePath
+#include dataSummarizePath
 #include ChangeandCheckStatusPath
 #include PlaceNewOrderPath
-#include UserSelectPath
 #include dataSavePath
-#include dataSummarizeFuncPath
+#include UserSelectPath
 
 void init() {
     loadProvinces();
@@ -36,7 +36,7 @@ int main(){
         scanf("%d",&user_ans);
         getchar();
         if (user_ans == 1){
-            printf("Please enter the password (type \"c\" to cancel Admin login) : ");
+            printf("Please enter the password : ");
             fgets(user_buffer,20,stdin);
             user_buffer[strlen(user_buffer)-1] = '\0';
             if (strcmp(user_buffer, "CPE888") == 0){

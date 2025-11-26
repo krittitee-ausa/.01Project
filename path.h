@@ -14,6 +14,6 @@
 #define PlaceNewOrderPath "./functions/placeNewOrder.c"
 #define UserSelectPath "./functions/User_select.c"
 #define dataSavePath "./functions/datasave.c"
-#define dataSummarizeFuncPath "./functions/Summarize.c"
+#define dataSummarizePath "./functions/Summarize.c"
 
 #endif

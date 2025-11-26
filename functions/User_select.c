@@ -32,7 +32,7 @@ void Admin_POV(){
                 break;
             case 6:
                 printf("\033[1mSure!\033[0m");
-                SummarizeFunc();
+                Summarize();
                 break;
             default:
                 printf("\033[1m Invalid command, please input the number of command again.\033[0m");
