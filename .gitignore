@@ -13,3 +13,4 @@ CMakeLists.txt
 tempCodeRunnerFile.c
 *.exe
 .DS_Store
+test.c

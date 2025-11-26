@@ -1,8 +1,7 @@
-
 void Admin_POV(){
     int n;
     while (1){
-        printf("\n 1.List all ongoing package.\n 2.List all delivered package.\n 3.check a package status.\n 4.change a package status.\n 5.make (a) delivery order(s).\n");
+        printf("\n 1.List all ongoing package.\n 2.List all delivered package.\n 3.check a package status.\n 4.change a package status.\n 5.make (a) delivery order(s).\n 6.view summary.\n");
         printf("your desired service number (-1 to exit program): ");
         scanf("%d",&n);
         getchar();
@@ -30,6 +29,10 @@ void Admin_POV(){
             case 5:
                 printf("\033[1mSure!\033[0m");
                 NewOrder();
+                break;
+            case 6:
+                printf("\033[1mSure!\033[0m");
+                SummarizeFunc();
                 break;
             default:
                 printf("\033[1m Invalid command, please input the number of command again.\033[0m");

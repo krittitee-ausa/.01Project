@@ -13,7 +13,7 @@
 #include PlaceNewOrderPath
 #include UserSelectPath
 #include dataSavePath
-
+#include dataSummarizeFuncPath
 
 void init() {
     loadProvinces();
