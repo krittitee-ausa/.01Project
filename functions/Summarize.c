@@ -35,9 +35,9 @@ float deltaDeliverySpeed() {
 }
 
 void Summarize() {
-    printf("\nNumber of on going package%s: \t%d", (dataCount[0] > 1) ? "s" : "", dataCount[0]);
+    printf("\n\nNumber of on going package%s: \t%d", (dataCount[0] > 1) ? "s" : "", dataCount[0]);
     printf("\nNumber of delivered package%s: \t%d", (dataCount[1] > 1) ? "s" : "", dataCount[1]);
-    printf("\nAverage Delivery Speed: %.2f day(s)", deltaDeliverySpeed());
+    printf("\nAverage Delivery Speed: \t%.2f day(s)", deltaDeliverySpeed());
 
     printf("\n\nDo you want to see monthly summary (y/n): ");
     char Ans;
