@@ -53,7 +53,7 @@ void NewOrder(){
     fgets(buffer[0],50,stdin);
     buffer[0][strlen(buffer[0])-1] = '\0';
 
-    printf("who do you want to send yor package to? : ");
+    printf("who do you want to send your package to? : ");
     fgets(buffer[1],50,stdin);
     buffer[1][strlen(buffer[1])-1] = '\0';
 
