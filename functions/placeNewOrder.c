@@ -4,7 +4,27 @@ typedef struct{
     
 }lowercaseP;
 int provinceIndex[2];
-lowercaseP* lowercaseProvinces; 
+lowercaseP* lowercaseProvinces;
+
+int stringCompare(char str1[],char str2[]){
+        int strConst1 = 0,strConst2 = 0;
+        for (int i = 0; i < strlen(str1)-strConst1 || i < strlen(str2)-strConst2;i++){
+            if (str1[i+strConst1] == ' '){
+                strConst1++;
+            }
+            if (str2[i+strConst2] == ' '){
+                strConst2++;
+            }
+            if (str1[i+strConst1] != str2[i+strConst2]){
+                return 1;
+            }
+            //else printf("match!\n");
+        }
+        //printf("survived");
+        return 0;
+    }
+
+
 int lowercase(char str[],int* index){
     char str2[] = "see all provinces";
     if (strcmp(str,str2) == 0){
@@ -21,7 +41,7 @@ int lowercase(char str[],int* index){
             }
         }
         for (int i = 0; i < ProvincesCount;i++){
-            if (strcmp(str,lowercaseProvinces[i].name) == 0)
+            if (stringCompare(str,lowercaseProvinces[i].name) == 0)
             { 
                 *index = i;
                 return 1;
@@ -40,12 +60,15 @@ void readlowercaseProvinces(){
         strcpy(lowercaseProvinces[i].name,Provinces[i].provinceNameEn);
         lowercaseProvinces[i].index = Provinces[i].provinceCode;
         for (int j = 0;j < strlen(lowercaseProvinces[i].name);j++){
-        if (lowercaseProvinces[i].name[j] <= 90 && lowercaseProvinces[i].name[j] >=65){
-            lowercaseProvinces[i].name[j]+=32;
+            if (lowercaseProvinces[i].name[j] <= 90 && lowercaseProvinces[i].name[j] >=65){
+                lowercaseProvinces[i].name[j]+=32;
         }
     }
-        }
+    
 }
+        
+}
+
 
 void NewOrder(){
     char buffer[4][50];
@@ -79,8 +102,8 @@ void NewOrder(){
     while(1){
         printf("\nSENDER : %s \n",buffer[0]);
         printf("RECIEVER : %s \n",buffer[1]);
-        printf("FROM : %s \n",buffer[2]);
-        printf("TO : %s \n",buffer[3]);
+        printf("FROM : %s \n",Provinces[provinceIndex[0]].provinceNameEn);
+        printf("TO : %s \n",Provinces[provinceIndex[1]].provinceNameEn);
         printf("\nis the information correct?(y/n and c to cancel) : ");
         scanf("%c",&ans);
         getchar();
