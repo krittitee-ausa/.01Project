@@ -6,6 +6,20 @@ int dataCount[3];
 
 double time_spent;
 
+int compareTime(const void *a, const void *b) {
+    // Cast the void pointers to Player pointers
+    const package *A = (const package *)a;
+    const package *B = (const package *)b;
+
+    // Compare the 'score' members
+    if (A->time < B->time) {
+        return -1; // playerA comes before playerB
+    } else if (A->time > B->time) {
+        return 1;  // playerA comes after playerB
+    } else {
+        return 0;  // scores are equal
+    }
+}
 
 void loadPackageData() {
   FILE *counterFile = fopen(dataPath"counter.txt", "r");
@@ -70,7 +84,7 @@ void loadPackageData() {
 
   fclose(ongoingPackageFile);
   
-
+  qsort(onGoingPackageData, dataCount[0], sizeof(package), compareTime);
 
   return;
 }
@@ -101,5 +115,7 @@ void loadDeliveredPackageData(){
     }
     }
     fclose(deliveredPackageFile);
+
+    qsort(deliveredPackageData, dataCount[1], sizeof(package), compareTime);
     
 }
