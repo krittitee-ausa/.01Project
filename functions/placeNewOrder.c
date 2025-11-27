@@ -10,8 +10,11 @@ int stringCompare(char str1[],char str2[]){
         int strConst1 = 0,strConst2 = 0;
         for (int i = 0; i < strlen(str1)-strConst1 || i < strlen(str2)-strConst2;i++){
             if (str1[i+strConst1] == ' '){
-                strConst1++;
-            }
+                do{
+                    strConst1++;
+                }while (str1[i + strConst1] == ' ');
+                }
+            
             if (str2[i+strConst2] == ' '){
                 strConst2++;
             }
@@ -22,7 +25,7 @@ int stringCompare(char str1[],char str2[]){
         }
         //printf("survived");
         return 0;
-    }
+    } 
 
 
 int lowercase(char str[],int* index){
