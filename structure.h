@@ -2,11 +2,13 @@
 #define myStructure
 #include <time.h>
 
-typedef struct {
+typedef struct
+{
     int provinceCode;
     char provinceNameEn[50];
 } ProvinceData;
-typedef struct{
+typedef struct
+{
     char sender[400];
     char reciever[40];
     char id[13];
@@ -15,7 +17,5 @@ typedef struct{
     time_t time;
     time_t deliveredTime;
 } package;
-
-
 
 #endif

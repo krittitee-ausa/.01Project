@@ -1,199 +1,220 @@
-typedef struct{
+typedef struct
+{
     char name[50];
     int index;
-    
-}lowercaseP;
+
+} lowercaseP;
 int provinceIndex[2];
-lowercaseP* lowercaseProvinces;
+lowercaseP *lowercaseProvinces;
 
-int stringCompare(char str1[],char str2[]){
-        int strConst1 = 0,strConst2 = 0;
-        for (int i = 0; i < strlen(str1)-strConst1 || i < strlen(str2)-strConst2;i++){
-            if (str1[i+strConst1] == ' '){
-                do{
-                    strConst1++;
-                }while (str1[i + strConst1] == ' ');
-                }
-            
-            if (str2[i+strConst2] == ' '){
-                strConst2++;
-            }
-            if (str1[i+strConst1] != str2[i+strConst2]){
-                return 1;
-            }
-            //else printf("match!\n");
+int stringCompare(char str1[], char str2[])
+{
+    int strConst1 = 0, strConst2 = 0;
+    for (int i = 0; i < strlen(str1) - strConst1 || i < strlen(str2) - strConst2; i++)
+    {
+        if (str1[i + strConst1] == ' ')
+        {
+            do
+            {
+                strConst1++;
+            } while (str1[i + strConst1] == ' ');
         }
-        //printf("survived");
-        return 0;
-    } 
 
+        if (str2[i + strConst2] == ' ')
+        {
+            strConst2++;
+        }
+        if (str1[i + strConst1] != str2[i + strConst2])
+        {
+            return 1;
+        }
+        // else printf("match!\n");
+    }
+    // printf("survived");
+    return 0;
+}
 
-int lowercase(char str[],int* index){
+int lowercase(char str[], int *index)
+{
     char str2[] = "see all provinces";
-    if (strcmp(str,str2) == 0){
-        for (int i = 0;i < ProvincesCount;i++){
-            printf("%s\n",Provinces[i].provinceNameEn);
-            
+    if (strcmp(str, str2) == 0)
+    {
+        for (int i = 0; i < ProvincesCount; i++)
+        {
+            printf("%s\n", Provinces[i].provinceNameEn);
         }
         printf("\n please input the province again : ");
     }
-    else{
-        for (int i = 0;i < strlen(str);i++){
-            if (str[i] <= 90 && str[i] >=65){
-            str[i]+=32;
+    else
+    {
+        for (int i = 0; i < strlen(str); i++)
+        {
+            if (str[i] <= 90 && str[i] >= 65)
+            {
+                str[i] += 32;
             }
         }
-        for (int i = 0; i < ProvincesCount;i++){
-            if (stringCompare(str,lowercaseProvinces[i].name) == 0)
-            { 
+        for (int i = 0; i < ProvincesCount; i++)
+        {
+            if (stringCompare(str, lowercaseProvinces[i].name) == 0)
+            {
                 *index = i;
                 return 1;
             }
         }
-        //printf("%s\n",buffer[2]);
+        // printf("%s\n",buffer[2]);
         printf("invalid provinces, please input the provinces again (type \"see all provinces\" to view all province possible.)\n: ");
-        
     }
     return 0;
-    
 }
-void readlowercaseProvinces(){
-    lowercaseProvinces = calloc(ProvincesCount,sizeof(lowercaseP));
-    for (int i = 0; i < ProvincesCount;i++){
-        strcpy(lowercaseProvinces[i].name,Provinces[i].provinceNameEn);
+void readlowercaseProvinces()
+{
+    lowercaseProvinces = calloc(ProvincesCount, sizeof(lowercaseP));
+    for (int i = 0; i < ProvincesCount; i++)
+    {
+        strcpy(lowercaseProvinces[i].name, Provinces[i].provinceNameEn);
         lowercaseProvinces[i].index = Provinces[i].provinceCode;
-        for (int j = 0;j < strlen(lowercaseProvinces[i].name);j++){
-            if (lowercaseProvinces[i].name[j] <= 90 && lowercaseProvinces[i].name[j] >=65){
-                lowercaseProvinces[i].name[j]+=32;
+        for (int j = 0; j < strlen(lowercaseProvinces[i].name); j++)
+        {
+            if (lowercaseProvinces[i].name[j] <= 90 && lowercaseProvinces[i].name[j] >= 65)
+            {
+                lowercaseProvinces[i].name[j] += 32;
+            }
         }
     }
-    
-}
-        
 }
 
-
-void NewOrder(){
+void NewOrder()
+{
     char buffer[4][50];
     printf("\n what's your name? : ");
-    fgets(buffer[0],50,stdin);
-    buffer[0][strlen(buffer[0])-1] = '\0';
+    fgets(buffer[0], 50, stdin);
+    buffer[0][strlen(buffer[0]) - 1] = '\0';
 
     printf("who do you want to send your package to? : ");
-    fgets(buffer[1],50,stdin);
-    buffer[1][strlen(buffer[1])-1] = '\0';
+    fgets(buffer[1], 50, stdin);
+    buffer[1][strlen(buffer[1]) - 1] = '\0';
 
-    
     printf("what province are you in? (type \"see all provinces\" to view all province possible.)\n: ");
-    fgets(buffer[2],50,stdin);
-    buffer[2][strlen(buffer[2])-1] = '\0';
-    while (lowercase(buffer[2],&provinceIndex[0]) == 0){
-        fgets(buffer[2],50,stdin);
-        buffer[2][strlen(buffer[2])-1] = '\0';
+    fgets(buffer[2], 50, stdin);
+    buffer[2][strlen(buffer[2]) - 1] = '\0';
+    while (lowercase(buffer[2], &provinceIndex[0]) == 0)
+    {
+        fgets(buffer[2], 50, stdin);
+        buffer[2][strlen(buffer[2]) - 1] = '\0';
     }
-    
 
-    
     printf("and what is the destination's province? (type \"see all provinces\" to view all province possible.)\n: ");
-    fgets(buffer[3],50,stdin);
-    buffer[3][strlen(buffer[3])-1] = '\0';
-    while (lowercase(buffer[3],&provinceIndex[1]) == 0){
-        fgets(buffer[3],50,stdin);
-        buffer[3][strlen(buffer[3])-1] = '\0';
+    fgets(buffer[3], 50, stdin);
+    buffer[3][strlen(buffer[3]) - 1] = '\0';
+    while (lowercase(buffer[3], &provinceIndex[1]) == 0)
+    {
+        fgets(buffer[3], 50, stdin);
+        buffer[3][strlen(buffer[3]) - 1] = '\0';
     }
     char ans;
-    while(1){
-        printf("\nSENDER : %s \n",buffer[0]);
-        printf("RECIEVER : %s \n",buffer[1]);
-        printf("FROM : %s \n",Provinces[provinceIndex[0]].provinceNameEn);
-        printf("TO : %s \n",Provinces[provinceIndex[1]].provinceNameEn);
+    while (1)
+    {
+        printf("\nSENDER : %s \n", buffer[0]);
+        printf("RECIEVER : %s \n", buffer[1]);
+        printf("FROM : %s \n", Provinces[provinceIndex[0]].provinceNameEn);
+        printf("TO : %s \n", Provinces[provinceIndex[1]].provinceNameEn);
         printf("\nis the information correct?(y/n and c to cancel) : ");
-        scanf("%c",&ans);
+        scanf("%c", &ans);
         getchar();
-        if (ans == 'y'){
+        if (ans == 'y')
+        {
             printf("\033[1m\nSuccess! You successfully placed an order!\n\033[0m");
             dataCount[0]++;
-            package* temp = realloc(onGoingPackageData,dataCount[0]*sizeof(package));
+            package *temp = realloc(onGoingPackageData, dataCount[0] * sizeof(package));
             onGoingPackageData = temp;
-            strcpy(onGoingPackageData[dataCount[0]-1].sender,buffer[0]);
-            strcpy(onGoingPackageData[dataCount[0]-1].reciever,buffer[1]);
-            onGoingPackageData[dataCount[0]-1].from = Provinces[provinceIndex[0]];
-            onGoingPackageData[dataCount[0]-1].to = Provinces[provinceIndex[1]];
+            strcpy(onGoingPackageData[dataCount[0] - 1].sender, buffer[0]);
+            strcpy(onGoingPackageData[dataCount[0] - 1].reciever, buffer[1]);
+            onGoingPackageData[dataCount[0] - 1].from = Provinces[provinceIndex[0]];
+            onGoingPackageData[dataCount[0] - 1].to = Provinces[provinceIndex[1]];
             char strbuffer[11];
             char strbuffer2[13];
-            sprintf(strbuffer2,"%d%d",onGoingPackageData[dataCount[0]-1].from.provinceCode,onGoingPackageData[dataCount[0]-1].to.provinceCode);
+            sprintf(strbuffer2, "%d%d", onGoingPackageData[dataCount[0] - 1].from.provinceCode, onGoingPackageData[dataCount[0] - 1].to.provinceCode);
             time_t rawtime;
-            sprintf(strbuffer,"%ld",time(&rawtime));
-            strcat(strbuffer2,&strbuffer[4]);
+            sprintf(strbuffer, "%ld", time(&rawtime));
+            strcat(strbuffer2, &strbuffer[4]);
             long tmp[4];
             char *end;
-            tmp[0] = strtoll(strbuffer2,&end,10);
-            while(1){
+            tmp[0] = strtoll(strbuffer2, &end, 10);
+            while (1)
+            {
                 int a = 0;
-                for (int i = 0; i < dataCount[0]+dataCount[1];i++){
-                    if (i < dataCount[0]){
-                        tmp[1] = strtoll(onGoingPackageData[i].id,&end,10);
-                        if (tmp[1] == tmp[0]){
-                            tmp[0]++;
-                            a = 1;
-                            break;
-                        }
-                        
-                    }
-                    else if (i >= dataCount[0] && i < dataCount[0]+dataCount[1]){
-                         tmp[1] = strtoll(deliveredPackageData[i-dataCount[0]].id,&end,10);
-                        if (tmp[1] == tmp[0]){
+                for (int i = 0; i < dataCount[0] + dataCount[1]; i++)
+                {
+                    if (i < dataCount[0])
+                    {
+                        tmp[1] = strtoll(onGoingPackageData[i].id, &end, 10);
+                        if (tmp[1] == tmp[0])
+                        {
                             tmp[0]++;
                             a = 1;
                             break;
                         }
                     }
-                    else a = 0;
+                    else if (i >= dataCount[0] && i < dataCount[0] + dataCount[1])
+                    {
+                        tmp[1] = strtoll(deliveredPackageData[i - dataCount[0]].id, &end, 10);
+                        if (tmp[1] == tmp[0])
+                        {
+                            tmp[0]++;
+                            a = 1;
+                            break;
+                        }
+                    }
+                    else
+                        a = 0;
                 }
-                if (a == 0) break;
-
+                if (a == 0)
+                    break;
             }
-            sprintf(strbuffer2,"%ld",tmp[0]);
-            strcpy(onGoingPackageData[dataCount[0]-1].id,strbuffer2);
-            onGoingPackageData[dataCount[0]-1].time = time(&rawtime);
-            printf("\nYour package ID is : %s\n", onGoingPackageData[dataCount[0]-1].id);
+            sprintf(strbuffer2, "%ld", tmp[0]);
+            strcpy(onGoingPackageData[dataCount[0] - 1].id, strbuffer2);
+            onGoingPackageData[dataCount[0] - 1].time = time(&rawtime);
+            printf("\nYour package ID is : %s\n", onGoingPackageData[dataCount[0] - 1].id);
 
-            
             return;
         }
-        else if(ans == 'n'){
+        else if (ans == 'n')
+        {
             int index;
-            while(1){
+            while (1)
+            {
                 printf("Which data do you want to edit?\n1. Sender name\n2. Reciever name\n3. your province\n4. destination's province\nYour function : ");
-                scanf("%d",&index);
+                scanf("%d", &index);
                 getchar();
-                if (index < 1 || index > 4){
+                if (index < 1 || index > 4)
+                {
                     printf("please input the valid function number\n");
                     continue;
                 }
                 break;
             }
             printf("sure!\nplease input a new data : ");
-            fgets(buffer[index-1],50,stdin);
-            buffer[index-1][strlen(buffer[index-1])-1] = '\0';
-            if (index >= 3){
-                while(lowercase(buffer[index-1],&provinceIndex[index -3]) == 0){
-                    fgets(buffer[index-1],50,stdin);
-                    buffer[index-1][strlen(buffer[index-1])-1] = '\0';
+            fgets(buffer[index - 1], 50, stdin);
+            buffer[index - 1][strlen(buffer[index - 1]) - 1] = '\0';
+            if (index >= 3)
+            {
+                while (lowercase(buffer[index - 1], &provinceIndex[index - 3]) == 0)
+                {
+                    fgets(buffer[index - 1], 50, stdin);
+                    buffer[index - 1][strlen(buffer[index - 1]) - 1] = '\0';
                 }
             }
             printf("\n");
-            
         }
-        else if(ans == 'c'){
+        else if (ans == 'c')
+        {
             printf("cancelling the order.\n Success!\n");
             return;
         }
-        else {
+        else
+        {
             printf("please input the mentioned characters.\n");
         }
     }
-    
-    
-
 }

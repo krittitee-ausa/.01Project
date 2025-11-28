@@ -6,7 +6,6 @@
 
 #define dataPath "./data/" //   "C:\\Users\\Team\\Documents\\project01\\.01Project\\data\\"
 
-
 #define loadProvincesPath "./functions/loadProvinces.c"
 #define loadPackageDataPath "./functions/loadPackageData.c"
 #define loadAllPackagePath "./functions/loadAllPackage.c"
