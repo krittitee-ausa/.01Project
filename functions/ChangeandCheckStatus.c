@@ -1,15 +1,12 @@
-// package *onGoingPackageData;
-// package *deliveredPackageData;
-
-void checkStatus()
+void checkStatus() //ฟังก์ชันตรวจสอบสถานะของพัสดุ
 {
     char ID[13];
     printf("\nplease enter your package ID : ");
     scanf("%s", ID);
     getchar();
-    for (int index = 0; index < dataCount[0]; index++)
+    for (int index = 0; index < dataCount[0]; index++) // ค้นหาพัสดุที่มี ID ตรงกับที่กรอกจากพัสดุที่กำลังจัดส่ง
     {
-        if (strcmp(ID, onGoingPackageData[index].id) == 0)
+        if (strcmp(ID, onGoingPackageData[index].id) == 0) // เจอ
         {
             printf("\n===== PACKAGE FOUND =====\n");
             printf("PACKAGE ID\t: %s\n", onGoingPackageData[index].id);
@@ -20,12 +17,12 @@ void checkStatus()
             printf("ORDER TIMESTAMP\t: %s\n", ctime(&onGoingPackageData[index].time));
             printf("\033[1mPACKAGE STATUS : DELIVERY IN PROGRESS.\n\033[0m");
             printf("==========================\n");
-            return;
+            return; // ออกจากการทำงานในฟังก์ชันนี้
         }
     }
-    for (int index = 0; index < dataCount[1]; index++)
+    for (int index = 0; index < dataCount[1]; index++) // ค้นหาพัสดุที่มี ID ตรงกับที่กรอกจากพัสดุที่จัดส่งสำเร็จ
     {
-        if (strcmp(ID, deliveredPackageData[index].id) == 0)
+        if (strcmp(ID, deliveredPackageData[index].id) == 0) // เจอ
         {
             printf("\n===== PACKAGE FOUND =====\n");
             printf("PACKAGE ID\t: %s\n", deliveredPackageData[index].id);
@@ -37,17 +34,17 @@ void checkStatus()
             printf("DELIVERED\t: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
             printf("\033[1mPACKAGE STATUS : DELIVERED SUCCESSFULLY.\n\033[0m");
             printf("==========================\n");
-            return;
+            return; // ออกจากการทำงานในฟังก์ชันนี้
         }
     }
-    printf("\n\033[1mINVALID OR INCORRECT PACKAGE ID, PLEASE CHECK YOUR PACKAGE ID AND TRY AGAIN\033[1m\n");
-    return;
+    printf("\n\033[1mINVALID OR INCORRECT PACKAGE ID, PLEASE CHECK YOUR PACKAGE ID AND TRY AGAIN\033[1m\n"); // ไม่เจอ
+    return; // ออกจากการทำงานในฟังก์ชันนี้
 }
 
-void changeStatus()
+void changeStatus() // ฟังก์ชันเปลี่ยนสถานะพัสดุ
 {
-    char ID[13];
-    int isChecked = 0;
+    char ID[13]; // เลข ID ของพัสดุ
+    int isChecked = 0; // 1 = เจอ, 0 = ไม่เจอ
     int indexs;
     while (1)
     {

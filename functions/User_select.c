@@ -1,4 +1,4 @@
-void Admin_POV()
+void Admin_POV() // หน้าเมนูสำหรับผู้ดูแลระบบ
 {
     int n;
     while (1)
@@ -10,41 +10,41 @@ void Admin_POV()
 
         switch (n)
         {
-        case -1:
+        case -1: // ออกจากการทำงาน
             printf("goodbye.");
             return;
-        case 1:
+        case 1: // ดูรายการพัสดุที่กำลังจัดส่งทั้งหมด
             printf("\033[1mSure!\n Here's all the package that are in delivery process!\033[0m\n");
-            loadOngoingdata();
+            loadOngoingdata(); // อยู่ใน ./functions/loadOngoingdata.c
             break;
-        case 2:
+        case 2: // ดูรายการพัสดุที่จัดส่งสำเร็จ
             printf("\033[1mSure!\n Here's all the package that already delivered!\033[0m\n");
-            loadDelivereddata();
+            loadDelivereddata(); // อยู่ใน ./functions/loadOngoingdata.c
             break;
-        case 3:
+        case 3: // ตรวจสอบพัสดุ
             printf("\033[1mSure!\033[0m");
-            checkStatus();
+            checkStatus(); // อยู่ใน ./functions/ChangeandCheckStatus.c
             break;
-        case 4:
+        case 4: // เปลี่ยนสถานะการจัดส่ง
             printf("\033[1mSure!\033[0m");
-            changeStatus();
+            changeStatus(); // อยู่ใน ./functions/ChangeandCheckStatus.c
             break;
-        case 5:
+        case 5: // เพิ่มพัสดุเข้าระบบ
             printf("\033[1mSure!\033[0m");
-            NewOrder();
+            NewOrder(); // อยู่ใน ./functions/placeNewOrder.c
             break;
-        case 6:
+        case 6: // ดูสรุป
             printf("\033[1mSure!\033[0m");
-            Summarize();
+            Summarize(); // อยู่ใน ./functions/Summarize.c
             break;
-        default:
+        default: // กรอกเมนูผิด
             printf("\033[1m Invalid command, please input the number of command again.\033[0m");
             break;
         }
     }
 }
 
-void Customer_POV()
+void Customer_POV() // หน้าเมนูสำหรับลูกค้า
 {
     int n;
     while (1)
@@ -55,18 +55,18 @@ void Customer_POV()
         getchar();
         switch (n)
         {
-        case -1:
+        case -1: // ปิดการทำงานของโปรแกรม
             printf("goodbye.");
             return;
-        case 1:
+        case 1: // ตรวจสอบพัสดุ
             printf("\033[1mSure!\033[0m");
             checkStatus();
             break;
-        case 2:
+        case 2: // เพิ่มข้อมูลเข้าระบบ
             printf("\033[1mSure!\033[0m");
             NewOrder();
             break;
-        default:
+        default: // กรอกตัวเลือกผิด
             printf("\033[1m Invalid command, please input the number of command again.\033[0m");
             break;
         }
