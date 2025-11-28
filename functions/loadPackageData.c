@@ -2,51 +2,45 @@ package *onGoingPackageData;
 package *deliveredPackageData;
 int dataCount[3];
 #include <stdio.h>
-#include <time.h> // Required for clock() function
+#include <time.h>
 
 double time_spent;
 
-int compareTime(const void *a, const void *b)
+int compareTime(const void *a, const void *b) // เปรียบเทียบเวลา ใช้สำหรับการจำเรียงลำดับข้อมูล
 {
-  // Cast the void pointers to Player pointers
   const package *A = (const package *)a;
   const package *B = (const package *)b;
 
-  // Compare the 'score' members
   if (A->time < B->time)
   {
-    return -1; // playerA comes before playerB
+    return -1;
   }
   else if (A->time > B->time)
   {
-    return 1; // playerA comes after playerB
+    return 1;
   }
   else
   {
-    return 0; // scores are equal
+    return 0;
   }
 }
 
-void loadPackageData()
+void loadPackageData() // อ่านค่าพัสดุทั้งหมดที่กำลังจัดส่งจากไฟล์
 {
-  FILE *counterFile = fopen(dataPath "counter.txt", "r");
-  FILE *ongoingPackageFile = fopen(dataPath "onGoingPackage.txt", "r");
+  FILE *counterFile = fopen(dataPath "counter.txt", "r"); // เปิดไฟล์
+  FILE *ongoingPackageFile = fopen(dataPath "onGoingPackage.txt", "r"); // เปิดไฟล์
 
-  /*for (int i = 0;i< 2;i++){
-    dataCount[i] = 0;
-    fscanf(counterFile, "%d", &dataCount[i]);
-  }*/
-  fscanf(counterFile, "%d %d", &dataCount[0], &dataCount[1]);
+  fscanf(counterFile, "%d %d", &dataCount[0], &dataCount[1]); // อ่านค่าจำนวนของพัสดุในไฟล์
   dataCount[2] = dataCount[1];
-  // printf("%d",dataCount[1]);
 
-  onGoingPackageData = calloc(dataCount[0], sizeof(package));
-  deliveredPackageData = calloc(dataCount[1], sizeof(package));
+  onGoingPackageData = calloc(dataCount[0], sizeof(package)); // จอง memory
+  deliveredPackageData = calloc(dataCount[1], sizeof(package)); // จอง memory
 
-  for (int index = 0; index < dataCount[0]; index++)
+  for (int index = 0; index < dataCount[0]; index++) // วนซ้ำตามจำนวนพัสดุที่กำลังจัดส่ง
   {
     int FromProvinceID;
     int ToProvinceID;
+    // อ่านค่าแต่ละบรรทัด
     fscanf(ongoingPackageFile, " %[^\n]\n", onGoingPackageData[index].sender);
     fscanf(ongoingPackageFile, " %[^\n]\n", onGoingPackageData[index].reciever);
     fscanf(ongoingPackageFile, "%s", onGoingPackageData[index].id);
@@ -54,7 +48,7 @@ void loadPackageData()
     fscanf(ongoingPackageFile, "%d", &ToProvinceID);
     fscanf(ongoingPackageFile, "%ld", &onGoingPackageData[index].time);
 
-    for (int i = 0; i < ProvincesCount; i++)
+    for (int i = 0; i < ProvincesCount; i++) // วนซ้ำตามจำนวนจังหวัด เพื่อหาจังหวัดที่มี Code ตรงกับที่เก็บไว้ในไฟล์ และนำไปเก็ยใน onGoingPackageData
     {
       if (FromProvinceID == Provinces[i].provinceCode)
       {
@@ -66,41 +60,24 @@ void loadPackageData()
       }
     }
 
-    // printf("\n\n=== Package Index %d ===\n", index);
-    // printf("SENDER: %s\n", onGoingPackageData[index].sender);
-    // printf("RECEIVER: %s\n", onGoingPackageData[index].reciever);
-    // printf("ID: %s\n", onGoingPackageData[index].id);
-    // printf("FROM: %d\n", FromProvinceID);
-    // printf("TO: %d\n", ToProvinceID);
-    // printf("TIMESTAMP: %s\n", ctime(&onGoingPackageData[index].time));
-    // printf("=== Package Index %d ===\n", index);
   }
 
-  // printf("\n\n=== Package Index %d ===\n", index);
-  // printf("SENDER: %s\n", deliveredPackageData[index].sender);
-  // printf("RECEIVER: %s\n", deliveredPackageData[index].reciever);
-  // printf("ID: %s\n", deliveredPackageData[index].id);
-  // printf("FROM: %d\n", FromProvinceID);
-  // printf("TO: %d\n", ToProvinceID);
-  // printf("TIMESTAMP: %s", ctime(&deliveredPackageData[index].time));
-  // printf("DELIVERED TIMESTAMP: %s\n", ctime(&deliveredPackageData[index].deliveredTime));
-  // printf("=== Package Index %d ===\n", index);
+  fclose(ongoingPackageFile); // ปิดไฟล์
 
-  fclose(ongoingPackageFile);
-
-  qsort(onGoingPackageData, dataCount[0], sizeof(package), compareTime);
+  qsort(onGoingPackageData, dataCount[0], sizeof(package), compareTime); // เรียงลำดับข้อมูลตามเวลาจากน้อยไปมาก
 
   return;
 }
 
-void loadDeliveredPackageData()
+void loadDeliveredPackageData() // อ่านค่าพัสดุทั้งหมดที่จัดส่งสำเร็จจากไฟล์
 {
 
-  FILE *deliveredPackageFile = fopen(dataPath "DeliveredPackageData.txt", "r");
-  for (int index = 0; index < dataCount[1]; index++)
+  FILE *deliveredPackageFile = fopen(dataPath "DeliveredPackageData.txt", "r"); // เปิดไฟล์
+  for (int index = 0; index < dataCount[1]; index++) // วนซำ้ตามจำนวนพัสดุที่จัดส่งสำเร็จ
   {
     int FromProvinceID;
     int ToProvinceID;
+    // อ่านค่าแต่ละบรรทัด
     fscanf(deliveredPackageFile, " %[^\n]\n", deliveredPackageData[index].sender);
     fscanf(deliveredPackageFile, " %[^\n]\n", deliveredPackageData[index].reciever);
     fscanf(deliveredPackageFile, "%s", deliveredPackageData[index].id);
@@ -109,7 +86,7 @@ void loadDeliveredPackageData()
     fscanf(deliveredPackageFile, "%ld", &deliveredPackageData[index].time);
     fscanf(deliveredPackageFile, "%ld", &deliveredPackageData[index].deliveredTime);
 
-    for (int i = 0; i < ProvincesCount; i++)
+    for (int i = 0; i < ProvincesCount; i++) // วนซ้ำเพื่อหาจังหวัดที่ Code ตรงกับที่เก็บไว้
     {
       if (FromProvinceID == Provinces[i].provinceCode)
       {
@@ -121,7 +98,7 @@ void loadDeliveredPackageData()
       }
     }
   }
-  fclose(deliveredPackageFile);
+  fclose(deliveredPackageFile); // ปิดไฟล์
 
-  qsort(deliveredPackageData, dataCount[1], sizeof(package), compareTime);
+  qsort(deliveredPackageData, dataCount[1], sizeof(package), compareTime); // เรียงลำดับข้อมูลตามเวลาจากน้อยไปมาก
 }
